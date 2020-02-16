@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <div id="nav">
+      <router-link to="/singer">歌手管理</router-link> |
+      <router-link to="/album">专辑管理</router-link> |
+      <router-link to="/user">用户管理</router-link> |
+      <router-link to="/about">关于</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 

@@ -1,51 +1,47 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link to="/album">专辑管理</router-link> |
-            <router-link to="/singer">歌手管理</router-link> |
-            <router-link to="/user">用户管理</router-link>
-        </div>
-        <router-view/>
-
+    <div id="nav">
+        <router-link to="/album">专辑管理</router-link> |
+        <router-link to="/singer">歌手管理</router-link> |
+        <router-link to="/user">用户管理</router-link>
+    </div>
+    <router-view/>
         <el-dialog
                 title="提示"
                 :visible.sync="dialogVisible"
                 width="30%">
-            <el-form :inline="true" ref="album_form" :model="album" class="demo-form-inline">
+            <el-form :inline="true" ref="user_form" :model="user" class="demo-form-inline">
                 <el-form-item label="ID">
-                    <el-input v-model="album.id" placeholder="请输入专辑ID"></el-input>
+                    <el-input v-model="user.id" placeholder="请输入用户ID"></el-input>
                 </el-form-item>
-                <el-form-item label="专辑">
-                    <el-input v-model="album.name" placeholder="请输入专辑名称"></el-input>
+                <el-form-item label="姓名">
+                    <el-input v-model="user.name" placeholder="请输入用户姓名"></el-input>
                 </el-form-item>
-                <el-form-item label="作者">
-                    <el-input v-model="album.author" placeholder="请输入作者"></el-input>
+                <el-form-item label="密码">
+                    <el-input v-model="user.password" placeholder="请输入密码"></el-input>
                 </el-form-item>
-                <el-form-item label="发表时间">
-                    <el-input v-model.number="album.age" placeholder="请输入发表时间"></el-input>
+                <el-form-item label="手机">
+                    <el-input v-model.number="user.telephone" placeholder="请输入手机"></el-input>
                 </el-form-item>
-                <el-form-item label="简介">
-                    <el-input v-model.number="album.introduction" placeholder="请输入简介"></el-input>
-                </el-form-item>
-                <el-form-item label="歌曲">
-                    <el-input v-model="album.songs" placeholder="请输入歌曲，用逗号分隔"></el-input>
+                <el-form-item label="邮件">
+                    <el-input v-model="user.mail" placeholder="请输入邮件"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveAlbum">确 定</el-button>
+                <el-button type="primary" @click="saveUser">确 定</el-button>
             </span>
         </el-dialog>
 
         <div align="right">
-            <el-form :inline="true" :model="album" class="handle-box">
+            <el-form :inline="true" :model="user" class="handle-box">
                 <el-form-item>
-                    <el-button type="primary" icon="el-icon-plus" @click="addAlbum">新增专辑</el-button>
+                    <el-button type="primary" icon="el-icon-plus" @click="addUser">新增用户</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <el-table
-                :data="albums"
+                :data="users"
                 style="width: 100%">
             <el-table-column
                     prop="id"
@@ -54,27 +50,22 @@
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="专辑"
+                    label="姓名"
                     width="">
             </el-table-column>
             <el-table-column
-                    prop="author"
-                    label="作者"
+                    prop="password"
+                    label="密码"
                     width="">
             </el-table-column>
             <el-table-column
-                    prop="age"
-                    label="发表时间"
+                    prop="telephone"
+                    label="手机"
                     width="">
             </el-table-column>
             <el-table-column
-                    prop="introduction"
-                    label="简介"
-                    width="">
-            </el-table-column>
-            <el-table-column
-                    prop="songs"
-                    label="歌曲"
+                    prop="mail"
+                    label="邮件"
                     width="">
             </el-table-column>
             <el-table-column
@@ -84,14 +75,14 @@
                     <el-button
                             type="text"
                             icon="el-icon-edit"
-                            @click="editAlbum(scope.$index, scope.row)"
+                            @click="editUser(scope.$index, scope.row)"
                     >编辑
                     </el-button>
                     <el-button
                             type="text"
                             icon="el-icon-delete"
                             class="red"
-                            @click="deleteAlbum(scope.$index, scope.row)"
+                            @click="deleteUser(scope.$index, scope.row)"
                     >删除
                     </el-button>
                 </template>
@@ -102,53 +93,53 @@
 
 <script>
     export default {
-        name: "AlbumManager",
+        name: "UserManager",
         created() {
             fetch(this.url, {"type": "GET"})
                 .then(res => res.json())
-                .then(album => this.albums = album)
+                .then(doc => this.users = doc)
         },
         data() {
             return {
-                url: "http://localhost:3001/album",
-                album: {id: '', name: '', author: '', age: '', introduction: '', songs: ''},
-                albums: [],
+                url: "http://localhost:3001/user",
+                user: {id: '', name: '', password: '', telephone: '', mail: ''},
+                users: [],
                 idx: -1,
                 dialogVisible: false
             }
         },
         methods: {
-            addAlbum() {
+            addUser() {
                 this.idx = -1;
-                this.album = {id: '', name: '', author: '', age: '', introduction: '', songs: ''};
+                this.user = {id: '', name: '', password: '', telephone: '', mail: ''};
                 this.dialogVisible = true;
             },
-            editAlbum(index, row) {
+            editUser(index, row) {
                 this.idx = index;
-                this.album = row;
+                this.user = row;
                 this.dialogVisible = true;
             },
-            saveAlbum() {
+            saveUser() {
                 this.dialogVisible = false;
                 //新增
                 if (this.idx == -1) {
                     fetch(this.url, {
                         method: "POST",
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(this.album)
+                        body: JSON.stringify(this.user)
                     }).then(res => res.json())
-                      .then(bk => this.albums.push(bk));
+                      .then(doc => this.users.push(doc));
                     this.$message.success(`新增成功`);
                 } else {//更新
                     fetch(this.url + "/update/", {
                         method: "POST",
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(this.album)
+                        body: JSON.stringify(this.singer)
                     });
                     this.$message.success(`修改第 ${this.idx + 1} 行成功`);
                 }
             },
-            deleteAlbum(index, row) {
+            deleteUser(index, row) {
                 // 二次确认删除
                 this.$confirm('确定要删除吗？', '提示', {
                     type: 'warning'
@@ -158,7 +149,7 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(row)
                     }).then(()=>{
-                       this.albums.splice(index, 1);
+                       this.users.splice(index, 1);
                     });
 
                     this.$message.success("删除" + row.id + "成功");
@@ -167,7 +158,6 @@
         }
     }
 </script>
-
 <style>
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
