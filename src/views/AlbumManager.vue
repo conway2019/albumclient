@@ -43,6 +43,9 @@
                 <el-form-item>
                     <el-button type="primary" icon="el-icon-plus" @click="addAlbum">新增专辑</el-button>
                 </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="intData">数据初始化</el-button>
+                </el-form-item>
             </el-form>
         </div>
         <el-table
@@ -119,6 +122,9 @@
             }
         },
         methods: {
+            initAlbum() {
+
+            },
             addAlbum() {
                 this.idx = -1;
                 this.album = {id: '', name: '', author: '', age: '', introduction: '', songs: ''};
