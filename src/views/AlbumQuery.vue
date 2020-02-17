@@ -54,7 +54,7 @@
         },
         data() {
             return {
-                url: "http://localhost:3001/album",
+                url: "http://idanao.top:3001/album",
                 album: {id: '', name: '', author: '', age: '', introduction: '', songs: ''},
                 albums: [],
                 idx: -1,
