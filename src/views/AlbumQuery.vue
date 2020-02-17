@@ -1,50 +1,12 @@
 <template>
     <div id="app">
         <div id="nav">
-            <router-link to="/album">专辑管理</router-link> |
-            <router-link to="/singer">歌手管理</router-link> |
-            <router-link to="/user">用户管理</router-link>
-            (管理员)
+            <router-link to="/album">专辑</router-link> |
+            <router-link to="/singer">歌手</router-link> |
+            (发烧友)
         </div>
         <router-view/>
 
-        <el-dialog
-                title="提示"
-                :visible.sync="dialogVisible"
-                width="30%">
-            <el-form :inline="true" ref="album_form" :model="album" class="demo-form-inline">
-                <el-form-item label="ID">
-                    <el-input v-model="album.id" placeholder="请输入专辑ID"></el-input>
-                </el-form-item>
-                <el-form-item label="专辑">
-                    <el-input v-model="album.name" placeholder="请输入专辑名称"></el-input>
-                </el-form-item>
-                <el-form-item label="作者">
-                    <el-input v-model="album.author" placeholder="请输入作者"></el-input>
-                </el-form-item>
-                <el-form-item label="发表时间">
-                    <el-input v-model.number="album.age" placeholder="请输入发表时间"></el-input>
-                </el-form-item>
-                <el-form-item label="简介">
-                    <el-input v-model.number="album.introduction" placeholder="请输入简介"></el-input>
-                </el-form-item>
-                <el-form-item label="歌曲">
-                    <el-input v-model="album.songs" placeholder="请输入歌曲，用逗号分隔"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveAlbum">确 定</el-button>
-            </span>
-        </el-dialog>
-
-        <div align="right">
-            <el-form :inline="true" :model="album" class="handle-box">
-                <el-form-item>
-                    <el-button type="primary" icon="el-icon-plus" @click="addAlbum">新增专辑</el-button>
-                </el-form-item>
-            </el-form>
-        </div>
         <el-table
                 :data="albums"
                 style="width: 100%">
@@ -77,25 +39,6 @@
                     prop="songs"
                     label="歌曲"
                     width="">
-            </el-table-column>
-            <el-table-column
-                    fixed="right"
-                    label="操作">
-                <template slot-scope="scope">
-                    <el-button
-                            type="text"
-                            icon="el-icon-edit"
-                            @click="editAlbum(scope.$index, scope.row)"
-                    >编辑
-                    </el-button>
-                    <el-button
-                            type="text"
-                            icon="el-icon-delete"
-                            class="red"
-                            @click="deleteAlbum(scope.$index, scope.row)"
-                    >删除
-                    </el-button>
-                </template>
             </el-table-column>
         </el-table>
     </div>

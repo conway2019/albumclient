@@ -4,9 +4,16 @@ import SingerManager from '../views/SingerManager.vue'
 import AlbumManager from "../views/AlbumManager";
 import UserManager from "../views/UserrManager";
 
+import AlbumQuery from "../views/AlbumQuery";
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'albumQuery',
+    component: AlbumQuery
+  },
   {
     path: '/admin',
     name: 'admin',
