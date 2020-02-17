@@ -5,12 +5,23 @@ import AlbumManager from "../views/AlbumManager";
 import UserManager from "../views/UserrManager";
 
 import AlbumQuery from "../views/AlbumQuery";
+import SingerQuery from "../views/SingerQuery";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'client',
+    component: AlbumQuery
+  },
+  {
+    path: '/singerQuery',
+    name: 'singerQuery',
+    component: SingerQuery
+  },
+  {
+    path: '/albumQuery',
     name: 'albumQuery',
     component: AlbumQuery
   },

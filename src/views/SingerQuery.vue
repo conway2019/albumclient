@@ -1,14 +1,13 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link to="/albumQuery">专辑</router-link> |
-            <router-link to="/singerQuery">歌手</router-link> |
-            (发烧友)
-        </div>
-        <router-view/>
+    <div id="nav">
+        <router-link to="/albumQuery">专辑</router-link> |
+        <router-link to="/singerQuery">歌手</router-link> |
+        (发烧友)
+    </div>
 
         <el-table
-                :data="albums"
+                :data="singers"
                 style="width: 100%">
             <el-table-column
                     prop="id"
@@ -17,17 +16,12 @@
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="专辑"
-                    width="">
-            </el-table-column>
-            <el-table-column
-                    prop="author"
-                    label="作者"
+                    label="歌手"
                     width="">
             </el-table-column>
             <el-table-column
                     prop="age"
-                    label="发表时间"
+                    label="年龄"
                     width="">
             </el-table-column>
             <el-table-column
@@ -46,30 +40,29 @@
 
 <script>
     export default {
-        name: "AlbumQuery",
+        name: "SingerQuery",
         created() {
             fetch(this.url, {"type": "GET"})
                 .then(res => res.json())
-                .then(album => this.albums = album)
+                .then(singer => this.singers = singer)
         },
         data() {
             return {
-                url: "http://localhost:3001/album",
-                album: {id: '', name: '', author: '', age: '', introduction: '', songs: ''},
-                albums: [],
+                url: "http://localhost:3001/singer",
+                singer: {id: '', name: '', age: '', introduction: '', songs: ''},
+                singers: [],
                 idx: -1,
                 dialogVisible: false
             }
         },
         methods: {
-            queryAlbum() {
+            querySinger() {
             },
-            collectAlbum() {
+            collectSinger() {
             }
         }
     }
 </script>
-
 <style>
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
