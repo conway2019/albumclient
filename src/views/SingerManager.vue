@@ -102,7 +102,7 @@
         },
         data() {
             return {
-                url: "http://localhost:3001/singer",
+                url: "http://idanao.top:3001/singer",
                 singer: {id: '', name: '', age: '', introduction: '', songs: ''},
                 singers: [],
                 idx: -1,

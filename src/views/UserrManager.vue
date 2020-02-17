@@ -102,7 +102,7 @@
         },
         data() {
             return {
-                url: "http://localhost:3001/user",
+                url: "http://idanao.top:3001/user",
                 user: {id: '', name: '', password: '', telephone: '', mail: ''},
                 users: [],
                 idx: -1,
